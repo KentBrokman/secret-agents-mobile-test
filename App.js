@@ -8,38 +8,55 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
+  Button
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { Navigation } from "react-native-navigation";
+import { loginRoot } from '.';
 
 
-const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+const App = (props) => {
   return (
     <View>
-
-      <Text>ooop</Text>
-      </View>
+      <Text>hello</Text>
+      <Button
+        title='Push Settings Screen'
+        color='#710ce3'
+        onPress={() => Navigation.push(props.componentId, {
+          component: {
+            name: 'Settings',
+            options: {
+              topBar: {
+                title: {
+                  text: 'Settings'
+                }
+              }
+            }
+          }
+        })}/>
+        <Button
+                title='Log Out'
+                color='#710ce3'
+                onPress={() => Navigation.setRoot(loginRoot)}
+            />
+    </View>
   );
 };
+
+App.options = {
+  topBar: {
+    title: {
+      text: 'Home',
+      color: 'white'
+    },
+    background: {
+      color: '#4d089a'
+    }
+  }
+}
 
 const styles = StyleSheet.create({
   sectionContainer: {
